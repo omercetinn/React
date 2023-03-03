@@ -29,7 +29,7 @@ function formatPrice(p){
 var template2 =
     <div id="product-details">
         <h2 id="product-name">name:{product.name}</h2>
-        <p id="product-price">price : {product.price}}</p>
+        <p id="product-price">price : {product.price}</p>
         <p id="product-desc">description: {product.description}</p>
     </div>;
 
