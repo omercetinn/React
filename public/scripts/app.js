@@ -3,36 +3,36 @@
 //JSX - Javascript XML
 
 var root = document.getElementById('root');
-var template = /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", {
-  id: "header"
-}, "Hello Word"), /*#__PURE__*/React.createElement("div", null, "Lorem,ipsum dolor."), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, "Lorem,ipsum."), /*#__PURE__*/React.createElement("li", null, "Lorem,ipsum."), /*#__PURE__*/React.createElement("li", null, "Lorem,ipsum.")));
-var name = "Samsung S10";
-var price = 5000;
-var description = "Çok iyi bir telefon";
-var product = {
-  name: "Samsung S10",
-  price: 8000,
-  description: "Çok iyi bir telefon"
+var app = {
+  title: "Todo Application",
+  description: "Lorem, ipsum dolor.",
+  items: ['item 1', 'item 2']
 };
-function formatPrice(p) {
-  return p.price + ' TL';
+function onFormSubmit(event) {
+  event.preventDefault();
+  var item = event.target.elements.txtItem.value;
+  if (item) {
+    app.items.push(item);
+    event.target.elements.txtItem.valu = '';
+    render();
+  }
+  console.log('form submitted');
 }
-var template2 = /*#__PURE__*/React.createElement("div", {
-  id: "product-details"
-}, /*#__PURE__*/React.createElement("h2", {
-  id: "product-name"
-}, "name:", product.name), /*#__PURE__*/React.createElement("p", {
-  id: "product-price"
-}, "price : ", product.price, "}"), /*#__PURE__*/React.createElement("p", {
-  id: "product-desc"
-}, "description: ", product.description));
-
-//React
-/*var template = React.createElement(
-'h1',
-null,
-'Hello Word'
-);*/
-
-//ReactDOM
-ReactDOM.render(template2, root);
+function clearItems() {
+  app.items = [];
+  render();
+}
+function render() {
+  var template = /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, app.title), /*#__PURE__*/React.createElement("div", null, app.description, "."), /*#__PURE__*/React.createElement("ul", null, /*#__PURE__*/React.createElement("li", null, "Lorem,ipsum."), /*#__PURE__*/React.createElement("li", null, "Lorem,ipsum."), /*#__PURE__*/React.createElement("li", null, "Lorem,ipsum.")), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("button", {
+    onClick: clearItems
+  }, "Clear Items")), /*#__PURE__*/React.createElement("p", null, app.items.length), /*#__PURE__*/React.createElement("form", {
+    onSubmit: onFormSubmit
+  }, /*#__PURE__*/React.createElement("input", {
+    type: "text",
+    name: "txtItem"
+  }), /*#__PURE__*/React.createElement("button", {
+    type: "submit"
+  }, "Add Item")));
+  ReactDOM.render(template, root);
+}
+render();

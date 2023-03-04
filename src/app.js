@@ -2,45 +2,54 @@
 //JSX - Javascript XML
 
 var root = document.getElementById('root');
+var app ={
+    title:"Todo Application",
+    description:"Lorem, ipsum dolor.",
+    items:['item 1', 'item 2']
+}
+function onFormSubmit(event){
+    event.preventDefault();
 
-var template = <div>
-<h1 id="header">Hello Word</h1><div>Lorem,ipsum dolor.</div>
-<ul>
-    <li>Lorem,ipsum.</li>
-    <li>Lorem,ipsum.</li>
-    <li>Lorem,ipsum.</li>
-</ul>
-</div>;
+    var item = event.target.elements.txtItem.value;
+    if(item){
+        app.items.push(item);
+        event.target.elements.txtItem.valu='';
+        render();
 
-var name="Samsung S10";
-var price = 5000;
-var description = "Çok iyi bir telefon";
-
-var product={
-    name:"Samsung S10",
-    price:8000,
-    description:"Çok iyi bir telefon"
+    }
+    console.log('form submitted');
 }
 
-function formatPrice(p){
-    return p.price +' TL';
+function clearItems(){
+    app.items= [];
+    render();
 }
 
-var template2 =
-    <div id="product-details">
-        <h2 id="product-name">name:{product.name}</h2>
-        <p id="product-price">price : {product.price}</p>
-        <p id="product-desc">description: {product.description}</p>
-    </div>;
+function render(){
+    var template = (
+        <div>
+            <h1>{app.title}</h1>
+            <div>{app.description}.</div>
+            <ul>
+                <li>Lorem,ipsum.</li>
+                <li>Lorem,ipsum.</li>
+                <li>Lorem,ipsum.</li>
+            </ul>
+            <p>
+            <button onClick={clearItems}>Clear Items</button>
+            </p>
+            <p>{app.items.length}</p>
+            <form onSubmit={onFormSubmit}>
+                <input type="text" name="txtItem"/>
+                <button type="submit">Add Item</button>
+            </form>
+        </div>
+    );
+    
+    ReactDOM.render(template,root);
+}
 
-//React
-/*var template = React.createElement(
-'h1',
-null,
-'Hello Word'
-);*/
+render();
 
-//ReactDOM
-ReactDOM.render(template2,root);
 
 
